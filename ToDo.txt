@@ -1,0 +1,37 @@
+ToDo for WordIndex
+
+Copyright (C) 2007-2008, Martin J. Moene.
+WordIndex is free software, see the Copying document.
+
+
+// TODO (Martin#1#): refactoring
+// TODO (Martin#1#): unit tests
+// TODO (Martin#1#): single makefile (recursive considered harmfull)
+// TODO (Martin#1#): makefiles Unix, Windows
+// TODO (Martin#1#): Web-site /project/wordindex
+// TODO (Martin#1#): announce on freshmeat
+
+
+--------------------------------------------------------------------------
+O p e n   I s s u e s
+--------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------
+C l o s e d   I s s u e s
+--------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------
+T e m p l a t e
+--------------------------------------------------------------------------
+
+Issue nn  20yy-mm-dd   Martin Moene   Bug z, done 20yy-mm-dd
+Description
+
+
+$Id$
+
+
+*** End of document ***
+

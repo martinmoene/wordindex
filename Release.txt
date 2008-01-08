@@ -1,0 +1,30 @@
+Release.txt for WordIndex.
+
+Copyright (C) 2007-2008, Martin J. Moene.
+WordIndex is free software, see the Copying document.
+
+Here is the procedure to release a version of WordIndex.
+In the following, directory HdlMids is refered to as ./
+
+- during development, log the changes in ./Changes.txt
+- svn check for modifications
+- svn commit changes per logically related group
+- adapt ./ChangeLog.txt, ./News.txt, ./ToDo.txt
+- svn commit above
+- svn update working copy
+- ./configure {date}, {version}
+- nmake dist
+...
+- create tagged version in svn repository:
+     svn copy https://svn.eld.leidenuniv.nl/repos/mjm/wordindex/trunk \
+     https://svn.eld.leidenuniv.nl/repos/mjm/wordindex/tags/{version} \
+     --message "Tagging the {version} release."
+
+
+Publish
+=========
+
+
+$Id$
+
+*** End of document ***

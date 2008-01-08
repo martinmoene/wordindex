@@ -1,0 +1,21 @@
+ChangeLog for WordIndex.
+
+Copyright (C) 2007-2008, Martin J. Moene.
+WordIndex is free software, see the Copying document.
+
+0.0 2007-08-22 (martin)
+
+___
+
+maj.min.triv  20yy-mm-dd
+- ADD: description
+       description (martin)
+- CHG: text
+- FIX: text
+
+
+$Id$
+
+
+*** End of document ***
+

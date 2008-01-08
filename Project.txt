@@ -1,0 +1,51 @@
+Project description for WordIndex.
+
+Copyright (C) 2007-2008, Martin J. Moene.
+WordIndex is free software, see the Copying document.
+
+
+C o n t e n t s
+1. Introduction
+2. Objectives
+3. Specifications
+4. Schedule
+5. Budget
+6. Organization
+
+
+1. Introduction
+
+The WordIndex ...
+
+
+2. Objectives
+
+
+
+3. Specifications
+
+"The product is the specification." For information what is being done, please
+see ToDo.txt, News.txt and ChangeLog.txt.
+
+
+4. Schedule
+
+
+
+5. Budget
+
+Unknown
+
+
+6. Organization
+
+
+
+Martin Moene
+
+
+$Id$
+
+
+*** End of document ***
+

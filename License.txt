@@ -1,0 +1,3 @@
+License for WordIndex
+
+See file Copying.

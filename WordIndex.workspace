@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="Workspace">
+		<Project filename="Project.cbp" />
+		<Project filename="Makefiles.cbp" />
+		<Project filename="src\Program.cbp" />
+		<Project filename="unittest\UnitTest.cbp" active="1" />
+		<Project filename="doc\Documentation.cbp" />
+	</Workspace>
+</CodeBlocks_workspace_file>

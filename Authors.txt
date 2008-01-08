@@ -1,0 +1,13 @@
+Authors for WordIndex
+
+Copyright (C) 2007-2008, Martin J. Moene.
+WordIndex is free software, see the Copying document.
+
+Martin Moene
+mailto:m.j.moene@eld.physics.LeidenUniv.nl
+http://www.eld.physics.LeidenUniv.nl/~moene/
+
+$Id$
+
+
+*** End of document ***

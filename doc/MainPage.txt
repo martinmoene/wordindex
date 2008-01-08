@@ -1,0 +1,582 @@
+/*
+ * MainPage.txt - doxygen documentation mainpage.
+ *
+ * This file is part of WordIndex.
+ *
+ * Copyright (C) 2007-2008 by Martin J. Moene.
+ * WordIndex is free software, see below.
+ *
+ * Author: Martin J. Moene
+ *
+ * $Id$
+ *
+ * WordIndex is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * WordIndex is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with mngdriver; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+/**
+ * \mainpage WordIndex
+
+\brief WordIndex creates an alphabetically sorted list of words present in the
+input files and it reports the lines where those words occur. In addition it
+can also report the frequency of word occurrences in percent.
+
+Besides this program, you may also be interested in
+\ref gnu_style_diction "GNU Style and Diction", in \ref antconc "AntConc",
+a freeware concordance program for Windows, Macintosh OS X, and Linux, and in
+\ref concordance "Concordance" (commercial).
+
+WordIndex is a makeover of one of my earlier C programs \ref xref "xref".
+The goal of writing xref was to become familiar with tokenizing input and
+programming an appropriate datastructure to store the words in.
+xref was written for \ref bds_c "BDSC 1.4" using \ref wordstar "WordStar" on
+a \ref bondwell "Bondwell 12" transportable computer running \ref cpm "CP/M 2.2."
+
+Twenty years later, I was interested to see how I would write such a program in C++.
+
+Notable aspects in which (the development of) this program differs from the historical one are
+- the use of the Standard Template Library [\ref wikipedia_stl "STL"]
+- the treatment of the input files as collections [\ref wilson_2007 "Wilson, 2007"]
+- the use of a library to handle commandline options [\ref tclap "TCLAP"],
+- the use of IDEs [\ref ms_visual_studio "MS Visual Studio", \ref codeblocks "Code::Blocks"]
+- the use of a single (i.e. non-recursive) makefile [\ref miller_1997 "Miller, 1997"]
+- the use of a refactoring tool [\ref visual_assist "Visual Assist"]
+- the use of a unit testing framework [\ref fructose "Fructose"]
+- the use of a tool to generate documentation from the program sources [\ref doxygen "Doxygen"].
+- the use of a version control system [\ref subversion "Subversion", \ref tortoisesvn "TortoiseSVN"].
+- assessing the \ref wikipedia_metric "software's complexity" through software metrics tools [\ref cccc, \ref locmetrix "LocMetrix"]
+
+<h2>Contents</h2>
+- \ref user_manual "User Manual"
+- \ref programmers_manual "On the Implementation"
+- \ref software_metrics "Software Metrics"
+- \ref unit_test "Unit Tests"
+- \ref references "Literature References"
+- \ref software "Software References"
+
+<h2>WordIndex License</h2>
+
+Copyright &copy; 2007-2008, by Martin J. Moene <m.j.moene@eld.physics.LeidenUniv.nl>.
+
+Permission to use, copy, modify, and distribute this software and its
+documentation under the terms of the GNU General Public License is hereby
+granted. No representations are made about the suitability of this
+software for any purpose. It is provided "as is" without express or
+implied warranty. See the
+<a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a>
+for more details.
+\n
+\n
+Web page: http://www.eld.physics.LeidenUniv.nl/~moene/<br>
+ *
+ */
+
+// === Namespaces ===
+
+/**
+ * \namespace wordindex The application's namespace
+ */
+
+// === Modules ===
+
+/**
+ * \defgroup user_manual User Manual
+ *
+ * More description.
+ *
+Here is WordIndex's help screen.
+\include help.txt
+ *
+ */
+
+/**
+ * \defgroup programmers_manual On the Implementation
+ *
+ * More description.
+ * @{
+ */
+
+/**
+ * \defgroup programmers_manual_input Reading Input Text
+ *
+ * WordIndex uses the idea by Matthew Wilson [\ref wilson_2007 "Wilson, 2007"]
+ * to treat the input stream as a collection.
+ *
+ * WordIndex uses the idea by Matthew Wilson [\ref wilson_2007 "Wilson, 2007"]
+ * to treat the input stream as a collection.
+ *
+ * Here's an example how class \ref wordindex::Tokenizer "Tokenizer" treats an
+ * input stream as a collection.
+ * \include copy_tokens.cpp
+ *
+ * Running <tt>copy_tokens < copy_tokens.cpp</tt> gives the following output.
+ * \include copy_tokens.txt
+ */
+
+/**
+ * \defgroup programmers_manual_storing Storing Text and Linenumbers
+ *
+ * More description.
+ */
+
+/// @} Programmers Manual ---
+
+/**
+ * \defgroup unit_test Unit Tests
+ *
+ * For unit testing I used the \ref fructose "Fructose" testing framework,
+ * which is both versatile and easy to use.
+ * @{
+ */
+
+/**
+ * \defgroup unit_test_logger Logger Unit Test
+ *
+ * More description.
+ * \include Test-Logger.cpp
+ */
+
+/**
+ * \defgroup unit_test_pair Pair Unit Test
+ *
+ * More description.
+ * \include Test-Pair.cpp
+ */
+
+/**
+ * \defgroup unit_test_tokenizer Tokenizer Unit Test
+ *
+ * More description.
+ * \include Test-Tokenizer.cpp
+ */
+
+/**
+ * \defgroup unit_test_utility Utility Unit Test
+ *
+ * More description.
+ * \include Test-Utility.cpp
+ */
+
+/**
+ * \defgroup unit_test_wordindex WordIndex Unit Test
+ *
+ * More description.
+ * \include Test-WordIndex.cpp
+ */
+
+/// @} unit_test ---
+
+/**
+ * \defgroup software_metrics Software Metrics
+ *
+ * More description on MVG etc.
+ * @{
+ */
+
+/**
+ * \defgroup software_metrics_overview Software Metrics Overview
+ *
+ * More description.
+ * \htmlinclude LocMetrics.html
+ */
+
+/**
+ * \defgroup software_metrics_per_function Software Metrics Per Function
+ *
+ * More description.
+ * \htmlinclude LocMetricsFunctions.html
+ */
+
+/// @} software_metrics
+
+/* *
+ * \defgroup user_manual_scm Version Control System
+ *
+ * More description.
+ *
+ * See \ref moene_2004
+ */
+
+/* *
+ * \defgroup ides Integrated Development Environments
+ *
+ * More description.
+ *
+ */
+
+/* *
+ * \defgroup patterns Design Patterns
+ *
+ * More description.
+ *
+ */
+
+/* *
+ * \defgroup user_manual_refactoring Refactoring
+ *
+ * More description.
+ *
+ */
+
+// ------
+
+/**
+ * \page references References
+ *
+
+<dl>
+
+<dt>\anchor aho_1986 [Aho et al., 1986]</dt>
+<dd>Alfred V. Aho, Ravi Sethi, and Jeffrey Ullman.
+<em><a href="http://en.wikipedia.org/wiki/Compilers:_Principles%2C_Techniques_and_Tools">Compilers -- Principles, Techniques and Tools.</a></em>
+1986. Addison Wesley.
+ISBN&nbsp;0-201-10088-6. Also known as the dragon book.<br>
+</dd>
+
+<!-- Authors: Andrei Alexandrescu -->
+<dt><a name="alexandrescu:moderncpp">[Alexandrescu, 2001]</a></dt><dd>Andrei
+  Alexandrescu.
+<a href="http://erdani.org/book/main.html"><em>Modern C++ Design: Generic
+  Programming and Design Patterns Applied</em></a>.
+Addison&ndash;Wesley, 2001.
+ISBN&nbsp;0201704315.
+</dd>
+
+<!-- Authors: Michael Feathers -->
+<dt><a name="feathers:legacy">[Feathers, 2004]</a></dt><dd>Michael Feathers.
+<a href="http://www.objectmentor.com/resources/books.html"><em>Working
+  Effectively with Legacy Code</em></a>.
+Prentice Hall, September 2004.
+ISBN-10:&nbsp;0&ndash;13&ndash;117705&ndash;2, ISBN-13:&nbsp;978&ndash;0--13&ndash;117705&ndash;5.
+</dd>
+
+<!-- Authors: Martin Fowler -->
+<dt><a name="fowler:refactoring">[Fowler, 1999]</a></dt><dd>Martin Fowler.
+<a href="http://martinfowler.com/books.html#refactoring"><em>Refactoring:
+  Improving the Design of Existing Code</em></a>.
+Addison&ndash;Wesley Professional, 1st edition, June 1999.
+ISBN-10&nbsp;0&ndash;201&ndash;48567&ndash;2, ISBN-13&nbsp;978&ndash;0--201&ndash;48567&ndash;7.
+</dd>
+
+<!-- Authors: Erick Gamma and Richard Helm and Ralph Johnson and John Vlissides -->
+<dt><a name="gamma:patterns">[Gamma et&nbsp;al., 1995]</a></dt><dd>Erick Gamma,
+  Richard Helm, Ralph Johnson, and John Vlissides.
+<a href="http://hillside.net/patterns/DPBook/DPBook.html"><em>Design
+  Patterns; Elements of Reusable Object-Oriented Software</em></a>.
+Addison&ndash;Wesley, 1995.
+ISBN&nbsp;0&ndash;201&ndash;63361&ndash;2.
+</dd>
+
+<!-- Authors: Nicolai M Josuttis -->
+<dt><a name="Josuttis:stdcpplib">[Josuttis, 1999]</a></dt><dd>Nicolai&nbsp;M.
+  Josuttis.
+<a href="http://www.josuttis.com/libbook"><em>The C++ Standard Library: A
+  Tutorial and Reference.</em></a>
+Addison&ndash;Wesley, 1999.
+ISBN&nbsp;0&ndash;201&ndash;37926&ndash;0.
+</dd>
+
+<!-- Authors: Joshua Kerievsky -->
+<dt><a name="kerievsky:refactoring">[Kerievsky, 2004]</a></dt><dd>Joshua
+  Kerievsky.
+<a href="http://industriallogic.com/xp/refactoring/"><em>Refactoring to
+  Patterns</em></a>.
+Addison&ndash;Wesley Professional, August 2004.
+ISBN-10&nbsp;0321213351, ISBN-13&nbsp;978-0321213358.
+</dd>
+
+<!-- Authors: Brian W Kernighan and Rob Pike -->
+<dt><a name="k&p:upe">[Kernighan and Pike, 1984]</a></dt><dd>Brian&nbsp;W. Kernighan
+  and Rob Pike.
+<a href="http://cm.bell-labs.com/cm/cs/upe/"><em>The UNIX programming
+  environment</em></a>.
+Prentice Hall, 1984.
+ISBN&nbsp;0&ndash;13&ndash;937681&ndash;X.
+</dd>
+
+<!-- Authors: Brian W Kernighan and Pike Rob -->
+<dt><a name="kernighan:pop">[Kernighan and Pike, 1999]</a></dt><dd>Brian&nbsp;W.
+  Kernighan and Rob Pike.
+<a href="http://cm.bell-labs.com/cm/cs/tpop/"><em>The Practice of
+  Programming</em></a>.
+Addison&ndash;Wesley, 1999.
+ISBN&nbsp;0&ndash;201&ndash;61586&ndash;X.
+</dd>
+
+<dt>\anchor main_2007 [Main, 2007]</dt>
+<dd>Chris Main.
+<em><a href="http://accu.org/index.php/journals/1326">C++ Unit Test Frameworks.</a></em> in ACCU Overload #78 - Apr 2007.<br>
+</dd>
+
+<!-- Authors: Robert C Martin -->
+<dt><a name="martin:agile">[Martin, 2003]</a></dt><dd>Robert&nbsp;C. Martin.
+<a href="http://www.objectmentor.com/resources/books.html"><em>Agile Software
+  Development, Principles, Patterns, and Practices</em></a>.
+Prentice Hall, 2003.
+ISBN&nbsp;0&ndash;13&ndash;597444&ndash;5.
+</dd>
+
+<dt>\anchor miller_1997 [Miller, 1997]</dt>
+<dd>Peter Miller.
+<em><a href="http://miller.emu.id.au/pmiller/books/rmch/">Recursive Make Considered Harmful</a></em>.
+</dd>
+
+<!-- Authors: Scott Meyers -->
+<dt><a name="meyers:effectivecpp">[Meyers, 2005]</a></dt><dd>Scott Meyers.
+<a href="http://www.aristeia.com/"><em>Effective C++: 55 Specific Ways to
+  Improve Your Programs and Designs</em></a>.
+Addison&ndash;Wesley, 3rd edition, 2005.
+ISBN&nbsp;0-321-33487-6.
+</dd>
+
+<!-- Authors: Martin Moene -->
+<dt>\anchor moene_2004 [Moene, 2004]</a></dt>
+<dd>Martin Moene.
+<a href="https://svn.eld.leidenuniv.nl/documents/proposal.html"><em>A proposal
+for software revision control at ELD</em></a>.
+</dd>
+
+<!-- Authors: Diomidis Spinellis -->
+<dt><a name="spinellis:codereading">[Spinellis, 2003]</a></dt><dd>Diomidis
+  Spinellis.
+<a href="http://www.spinellis.gr/codereading/"><em>Code Reading: The Open
+  Source Perspective</em></a>.
+Addison&ndash;Wesley, 2003.
+ISBN&nbsp;0&ndash;201&ndash;79940&ndash;5.
+</dd>
+
+<!-- Authors: Diomidis Spinellis -->
+<dt><a name="spinellis:codequality">[Spinellis, 2006]</a></dt><dd>Diomidis
+  Spinellis.
+<a href="http://www.spinellis.gr/codequality/"><em>Code Quality: The Open
+  Source Perspective</em></a>.
+Addison&ndash;Wesley, 2006.
+ISBN&nbsp;0&ndash;321&ndash;16607&ndash;8.
+</dd>
+
+<!-- Authors: Bjarne Stroustrup -->
+<dt><a name="stroustrup:C++3">[Stroustrup, 1997]</a></dt><dd>Bjarne Stroustrup.
+<a href="http://www.research.att.com/~bs/3rd.html"><em>The C++ Programming
+  Language</em></a>.
+Addison&ndash;Wesley, third edition, 1997.
+ISBN&nbsp;0&ndash;201&ndash;88954&ndash;4.
+</dd>
+
+<!-- Authors: David Vandevoorde and Josuttis Nicolai M -->
+<dt><a name="vandevoorde:templates">[Vandevoorde and Josuttis, 2002]</a></dt>
+<dd>David Vandevoorde and Nicolai&nbsp;M. Josuttis.
+<a href="http://www.josuttis.com/tmplbook"><em>C++ Templates - The Complete
+  Guide</em></a>.
+Addison&ndash;Wesley, 2002.
+ISBN&nbsp;0&ndash;201&ndash;73484&ndash;2.
+</dd>
+
+<dt>\anchor wikipedia_metric [Software Metric, Wikipedia]</dt>
+<dd>Software metric. (2007, December 24).
+<em>In Wikipedia, The Free Encyclopedia.</em>
+Retrieved 13:46, December 29, 2007, from http://en.wikipedia.org/w/index.php?title=Software_metric&oldid=179967990
+</dd>
+
+<dt>\anchor wikipedia_stl [STL, Wikipedia]</dt>
+<dd>Standard Template Library. (2007, November 18).
+<em>In Wikipedia, The Free Encyclopedia.</em>
+Retrieved 13:51, December 29, 2007, from http://en.wikipedia.org/w/index.php?title=Standard_Template_Library&oldid=172238817
+</dd>
+
+<!-- Authors: Matthew Wilson -->
+<dt>\anchor wilson_2005<a name="wilson:imperfect-C++">[Wilson, 2005]</a></dt>
+<dd>Matthew Wilson.
+<a href="http://www.imperfectcplusplus.com/"><em>Imperfect C++: Practical
+  Solutions for Real-Life Programming.</em></a>
+Addison&ndash;Wesley Professional, 2005.
+ISBN&nbsp;0&ndash;321&ndash;22877&ndash;4.
+</dd>
+
+<!-- Authors: Matthew Wilson -->
+<dt>\anchor wilson_2007
+<a name="wilson:extended-STL-V1">[Wilson, 2007]</a></dt>
+<dd>Matthew Wilson.
+<a href="http://www.extendedstl.com/"><em>Extended STL, Volume 1: Collections
+  and Iterators.</em></a>
+Addison&ndash;Wesley Professional, 2007.
+ISBN-10&nbsp;0&ndash;321&ndash;30550&ndash;7, ISBN-13&nbsp;978&ndash;0--321&ndash;30550&ndash;3.
+</dd>
+
+</dl>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+ *
+ */
+
+/**
+ * \page software Software
+ *
+<dl>
+
+<dt>
+\anchor antconc [AntConc]</dt>
+<dd>
+<em><a href="http://www.antlab.sci.waseda.ac.jp/antconc_index.html">AntConc, a freeware concordance program for Windows, Macintosh OS X, and Linux</a></em>.
+</dd>
+
+<dt>
+\anchor bds_c [BDS C]</dt>
+<dd>
+BDS C. (2007, October 21). <em>In Wikipedia, The Free Encyclopedia</em>. Retrieved 20:08, January 7, 2008, from http://en.wikipedia.org/w/index.php?title=BDS_C&oldid=166135994
+</dd>
+
+<dt>
+\anchor bondwell [Bondwell 12]</dt>
+<dd>
+Bondwell. (2007, May 1). <em>In Wikipedia, The Free Encyclopedia</em>. Retrieved 19:58, January 7, 2008, from http://en.wikipedia.org/w/index.php?title=Bondwell&oldid=127379329
+</dd>
+
+<dt>
+\anchor cccc [CCCC]</dt>
+<dd>
+<em><a href="http://cccc.sourceforge.net/">CCCC - C and C++ Code Counter</a></em>.
+</dd>
+
+<dt>
+\anchor codeblocks [Code::Blocks IDE]</dt>
+<dd>
+<em><a href="http://www.codeblocks.org/">Code::Blocks IDE</a></em>.
+</dd>
+
+<dt>
+\anchor concordance [Concordance]</dt>
+<dd>
+<em><a href="http://www.concordancesoftware.co.uk/">Concordance, text analysis and concordance software</a></em>.
+</dd>
+
+<dt>
+\anchor context [Context]</dt>
+<dd>
+<em><a href="http://www.context.cx/">Context Programmers Editor</a></em>.
+</dd>
+
+<dt>
+\anchor cpm [CP/M]</dt>
+<dd>
+CP/M. (2008, January 5). <em>In Wikipedia, The Free Encyclopedia</em>. Retrieved 20:10, January 7, 2008, from http://en.wikipedia.org/w/index.php?title=CP/M&oldid=182406242
+</dd>
+
+<dt>
+\anchor doxygen [Doxygen]</dt>
+<dd>
+<em><a href="http://www.doxygen.org/">Doxygen, a documentation system for C++, C,
+Java, Objective-C, Python, IDL (Corba and Microsoft flavors) and to some extent PHP, C#, and D.</a></em>.
+</dd>
+
+<dt>
+\anchor fastdep [FastDep]</dt>
+<dd>
+<em><a href="http://www.irule.be/bvh/c++/fastdep/">FastDep, a fast dependency generator for C/C++ files</a></em>.
+</dd>
+
+<dt>
+\anchor fructose [FRUCTOSE C++ Unit Testing Framework]</dt>
+<dd>
+<em><a href="http://fructose.sourceforge.net/">FRUCTOSE - Andrew Marlow's C++ Unit Testing Framework</a></em>.
+</dd>
+
+<dt>
+\anchor innosetup [Inno Setup]</dt>
+<dd>
+<em><a href="http://www.jrsoftware.org/isinfo.php">Inno Setup, a free installer for Windows programs</a></em>.
+</dd>
+
+<dt>
+\anchor gnuc [GNU C]</dt>
+<dd>
+<em><a href="http://gcc.gnu.org/">GCC, the GNU Compiler Collection.</a></em>.
+</dd>
+
+<dt>
+\anchor gnu_style_diction [GNU Style and Diction]</dt>
+<dd>
+<em><a href="http://www.gnu.org/software/diction/diction.html">GNU Style and Diction</a></em>.
+</dd>
+
+<dt>
+\anchor locmetrix [LocMetrix]</dt>
+<dd>
+<em><a href="http://www.locmetrics.com/">locmetrics.com</a></em>.
+</dd>
+
+<dt>
+\anchor ms_visual_studio [Microsoft Visual C++]</dt>
+<dd>
+<em><a href="http://http://msdn.microsoft.com/vstudio/">Visual Studio, a range of
+tools that offer many benefits for individual developers and software development teams.</a></em>.
+</dd>
+
+<dt>
+\anchor ms_hhc [Microsoft HTML Help Compiler]</dt>
+<dd>
+<em><a href="http://www.microsoft.com/downloads/details.aspx?displaylang=en&FamilyID=2363A6FC-CB70-464D-85E6-F598C11CCECF">
+HTML Help</a></em>.
+</dd>
+
+<dt>
+\anchor subversion [Subversion]</dt>
+<dd>
+<em><a href="http://subversion.tigris.org/">Subversion, a compelling replacement for CVS</a></em>.
+</dd>
+
+<dt>\anchor tclap [Templatized C++ Command Line Parser Library]</dt>
+<dd>
+<em><a href="http://tclap.sourceforge.net/">TCLAP, Templatized C++ Command Line Parser Library</a>
+by Michael E. Smoot</em>.
+</dd>
+
+<dt>\anchor tortoisesvn [TortoiseSVN]</dt>
+<dd>
+<em><a href="http://tortoisesvn.tigris.org/">TortoiseSVN, a Subversion client, implemented as a windows shell extension</em></a>.
+</dd>
+
+<dt>
+\anchor reactor_cpp [Refactor! for C++]</dt>
+<dd>
+<em><a href="http://www.devexpress.com/Products/NET/IDETools/RefactorCPP/">Refactor! for C++</a></em>.
+</dd>
+
+<dt>
+\anchor visual_assist [Visual Assist X]</dt>
+<dd>
+<em><a href="http://www.wholetomato.com/">Visual Assist X</a></em>.
+</dd>
+
+<dt>
+\anchor xref [xref Cross-Reference Program]</dt>
+<dd>
+<em><a href="http://www.eld.leidenuniv.nl/~moene/Home/museum/software/xref/">xref - Martin Moene's cross-reference program</a></em>.
+</dd>
+
+<dt>
+\anchor wordstar [WordStar]</dt>
+<dd>
+WordStar. (2008, January 2). <em>In Wikipedia, The Free Encyclopedia</em>. Retrieved 20:11, January 7, 2008, from http://en.wikipedia.org/w/index.php?title=WordStar&oldid=181739927
+</dd>
+
+</dl>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+ *
+ */
+
+/*
+ * end of file
+ */

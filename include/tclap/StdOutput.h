@@ -1,5 +1,5 @@
 
-/****************************************************************************** 
+/******************************************************************************
  * 
  *  file:  StdOutput.h
  * 
@@ -32,6 +32,22 @@
 #include <tclap/CmdLineOutput.h>
 #include <tclap/XorHandler.h>
 #include <tclap/Arg.h>
+
+namespace TCLAP {
+#if defined( _MSC_VER ) && ( _MSC_VER < 1310 )
+   /**
+    * the lowest of a and b.
+    */
+   template <typename T>
+   inline T min( const T a, const T b )
+   {
+      return (a < b ) ? a : b;
+   }
+#else
+   using std::min;
+   using std::max;
+#endif
+}
 
 namespace TCLAP {
 
@@ -237,7 +253,8 @@ inline void StdOutput::spacePrint( std::ostream& os,
 		while ( start < len )
 		{
 			// find the substring length
-			int stringLen = std::min( len - start, allowedLen );
+			int stringLen = min( len - start, allowedLen );
+			// int stringLen = std::min( len - start, allowedLen );
 
 			// trim the length so it doesn't end in middle of a word
 			if ( stringLen == allowedLen )
@@ -253,13 +270,15 @@ inline void StdOutput::spacePrint( std::ostream& os,
 				stringLen = allowedLen;
 
 			// check for newlines
-			for ( int i = 0; i < stringLen; i++ )
+			{for ( int i = 0; i < stringLen; i++ )
 				if ( s[start+i] == '\n' )
 					stringLen = i+1;
+			}
 
 			// print the indent	
-			for ( int i = 0; i < indentSpaces; i++ )
+			{for ( int i = 0; i < indentSpaces; i++ )
 				os << " ";
+			}
 
 			if ( start == 0 )
 			{

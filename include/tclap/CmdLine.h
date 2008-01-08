@@ -379,12 +379,13 @@ inline void CmdLine::parse(int argc, char** argv)
 
 	// this step is necessary so that we have easy access to mutable strings.
 	std::vector<std::string> args;
-  	for (int i = 1; i < argc; i++)
+  	{for (int i = 1; i < argc; i++)
 		args.push_back(argv[i]);
+  	}
 
 	int requiredCount = 0;
 
-  	for (int i = 0; static_cast<unsigned int>(i) < args.size(); i++)
+  	{for (int i = 0; static_cast<unsigned int>(i) < args.size(); i++)
 	{
 		bool matched = false;
 		for (ArgListIterator it = _argList.begin(); it != _argList.end(); it++)
@@ -405,7 +406,7 @@ inline void CmdLine::parse(int argc, char** argv)
 		if ( !matched && !Arg::ignoreRest() )
 			throw(CmdLineParseException("Couldn't find match for argument",
 			                             args[i]));
-    }
+    }}
 
 	if ( requiredCount < _numRequired )
 		throw(CmdLineParseException("One or more required arguments missing!"));

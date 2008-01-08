@@ -1,0 +1,4 @@
+project(generator) {
+  includes += include ../tclap-1.1.0/include
+}
+

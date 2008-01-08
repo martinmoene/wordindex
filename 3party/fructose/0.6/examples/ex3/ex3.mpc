@@ -1,0 +1,4 @@
+project(ex3) {
+  includes += ../../../fructose/include ../../../tclap-1.1.0/include
+}
+

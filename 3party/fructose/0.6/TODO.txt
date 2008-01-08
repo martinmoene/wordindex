@@ -1,0 +1,11 @@
+I really need to include more examples. Ahem.
+
+I am considering moving the license to GPLv3.
+Stay tuned.
+
+I have decided not to support ancient compilers such
+as the Sparcworks 4.2 Sun compiler, which
+does not have the STL and does not support namespaces.
+This pathetic excuse of a compiler is still in use
+in a number of commercial organisations.
+Tough luck.

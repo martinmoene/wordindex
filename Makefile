@@ -137,6 +137,8 @@ dep: src/version.h Makefile.dep
 
 Makefile.dep: FORCE
    $(CC) -MM -Iinclude src/main.cpp >$@
+   $(CC) -MM -Iinclude;../../src doc/examples/copy_tokens.cpp >>$@
+   $(CC) -MM -Iinclude;../../src doc/examples/insert_tokens.cpp >>$@
 
 # edit main.o => src/main.o   $@.tmp
 

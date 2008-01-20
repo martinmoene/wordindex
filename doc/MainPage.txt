@@ -127,7 +127,37 @@ Here is WordIndex's help screen.
 /**
  * \defgroup programmers_manual_storing Storing Text and Linenumbers
  *
- * More description.
+ * WordIndex uses a word--linenumbers collection (a map) to store the words with
+ * the list of linenumbers where the word occurs.
+ *
+ * WordIndex uses a word--linenumbers collection (a map) to store the words with
+ * the list of linenumbers where the word occurs.
+ *
+ * The following is a simple way to insert a word--linenumber pair into a
+ * \ref wordindex::WordIndex "WordIndex" collection.
+ * \code
+ * #include "WordIndex.h"
+ *
+ * void foo()
+ * {
+ *    using wordindex::WordIndex;
+ *
+ *    WordIndex map;
+ *    map.insert( WordIndex::token_type( "myToken", 123 ) );
+ * }
+ * \endcode
+ *
+ * Here's an example how tokens produced by class
+ * \ref wordindex::Tokenizer "Tokenizer" can be put in the word--linenumbers
+ * collection using an \ref wordindex::insert_iterator "insert iterator".
+ * The insert iterator is created by the \ref wordindex::wordindex_inserter
+ * "wordindex_inserter" convenience function.
+ * \include insert_tokens.cpp
+ *
+ * EXPLAIN
+ * insert_iterator< WordIndex >  wordindex_inserter (WordIndex &collection)
+ *  convenience function to create WordIndex insert_iterator.
+ *
  */
 
 /// @} Programmers Manual ---

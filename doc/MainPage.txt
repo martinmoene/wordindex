@@ -78,7 +78,7 @@ implied warranty. See the
 for more details.
 \n
 \n
-Web page: http://www.eld.physics.LeidenUniv.nl/~moene/<br>
+Web page: http://www.eld.leidenuniv.nl/~moene/Home/projects/wordindex/<br>
  *
  */
 

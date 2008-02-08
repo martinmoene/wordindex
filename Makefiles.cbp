@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="default">
-				<Option output="Makefiles.exe" prefix_auto="1" extension_auto="1" />
+				<Option output="Makefiles" prefix_auto="1" extension_auto="1" />
 				<Option type="0" />
 				<Option compiler="gcc" />
 			</Target>
@@ -28,6 +28,7 @@
 			<Option link="1" />
 		</Unit>
 		<Unit filename="doc\mkDoc.bat" />
+		<Unit filename="make.bat" />
 		<Unit filename="src\Module.mk">
 			<Option compile="1" />
 			<Option link="1" />

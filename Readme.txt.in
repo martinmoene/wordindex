@@ -14,25 +14,51 @@ FIXME:implementation
 C o n t e n t s
 
 1.  Introduction
-2.  Installation
-3.  Runtime
+2.  Build
+3.  Installation
 4.  Development
 5.  Distribution
 6.  Acknowledgments
 7.  See Also
 
 
-1.  I N T R O D U C T I O N
+1.  I n t r o d u c t i o n
 
 FIXME:
 
 
-2.  I n s t a l l a t i o n
+2.  B u i l d
 
 FIXME:
 
 
-3.  R u n t i m e
+2.1 Build Program
+
+WordIndex can be compiled as follows:
+
+GNU C : WordIndex/src>g++ -I../include -o wordindex.exe main.cpp
+MS VC8: WordIndex/src>cl /EHsc -I../include -Fewordindex.exe main.cpp
+
+The make procedure creates the unit test programs, wordindex.exe and the Doxygen
+documentation.
+
+Note: currently the makefiles are MS Nmake files, whereas the compilers used in
+the procedure is GNU C (!)
+
+
+2.2 Build Documentation
+
+The html documentation and the compressed html help (.chm) are created with
+Doxygen (http://www.doxygen.org/)as specified in the Doxygen configuration file
+WordIndex/doc/Doxyfile.
+
+WordIndex/doc>doxygen
+
+Creation of the compressed html help file requires Microsoft's Hypertext Help
+Compiler (http://www.microsoft.com/downloads/details.aspx?displaylang=en&FamilyID=2363A6FC-CB70-464D-85E6-F598C11CCECF)
+
+
+3.  I n s t a l l a t i o n
 
 FIXME:
 
@@ -42,17 +68,17 @@ FIXME:
 FIXME:
 
 
-5.  D I S T R I B U T I O N
+5.  D i s t r i b u t i o n
 
 FIXME:
 
 
-6.  A C K N O W L E D G M E N T S
+6.  A c k n o w l e d g m e n t s
 
 FIXME:
 
 
-7.  S E E   A L S O
+7.  S e e   a l s o
 
 See Also
 ==========
@@ -69,7 +95,7 @@ See also the documents Copying and Install.
 phoneto: +31-71-5275960
 
 The most recent version of the verlof package can be obtained from:
-	 http://www.eld.LeidenUniv.nl/~moene/wordindex/
+	 http://www.eld.LeidenUniv.nl/~moene/Home/projects/wordindex/
 
 $Id$
 

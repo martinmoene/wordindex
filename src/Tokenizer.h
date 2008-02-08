@@ -19,7 +19,7 @@
  * along with mngdriver; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id:$
+ * $Id$
  */
 
 /**
@@ -28,6 +28,8 @@
 
 #include "Pair.h"     // for pair_type
 #include "Utility.h"  // for class UnCopyable
+
+#include <cassert>     // for ::assert()
 
 namespace wordindex {
 

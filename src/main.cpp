@@ -19,7 +19,7 @@
  * along with mngdriver; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id:$
+ * $Id$
  */
 
 /*
@@ -66,7 +66,6 @@
 #include "Version.h"    // for WORDINDEX_VERSION_STRING
 #include "WordIndex.h"  // for class WordIndex
 
-#include <cassert>     // for ::assert()
 #include <ctype.h>     // for ::isalpha()
 
 #include <algorithm> // for std::copy()

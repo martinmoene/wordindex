@@ -3,8 +3,16 @@ ChangeLog for WordIndex.
 Copyright (C) 2007-2008, Martin J. Moene.
 WordIndex is free software, see the Copying document.
 
-0.0 2007-08-22 (martin)
+0.0.2 alpha 2008-02-08 (martin)
+- Updated Webpage,
+- Readme.txt: added inormation on building.
+- main.cpp, Tokenizer.h: moved inclusion of cassert to Tokenizer.h (VC8).
 
+0.0.1 alpha 2008-02-01? (martin)
+- Published on Webpage http://www.eld.leidenuniv.nl/~moene/Home/projects/wordindex/
+
+0.0.0 2007-08-22 (martin)
+- Initial setup
 ___
 
 maj.min.triv  20yy-mm-dd

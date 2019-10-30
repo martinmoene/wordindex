@@ -495,7 +495,7 @@ public:
       if ( m_options.frequency )
       {
          m_os <<
-            std::setw(3) << std::setprecision(3) << perct << "%" << " (" << count << ")  ";
+            std::fixed << std::setw(3) << std::setprecision(3) << perct << "%" << " (" << std::setw(6) << count << ")  ";
       }
       print_collection( m_os, value.second );
 

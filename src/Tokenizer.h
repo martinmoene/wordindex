@@ -29,6 +29,7 @@
 #include "Pair.h"     // for pair_type
 #include "Utility.h"  // for class UnCopyable
 
+#include <algorithm>   // for std::transform()
 #include <cassert>     // for ::assert()
 
 namespace wordindex {

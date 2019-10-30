@@ -783,6 +783,7 @@ int main( int argc, char* argv[] )
          else // FIXME: => read( is, options, context, ctx.keywords ); ??
          {
             Tokenizer tokenizer( is );
+            tokenizer.set_skip_comments();
 
             std::copy
             ( tokenizer.begin(), tokenizer.end()

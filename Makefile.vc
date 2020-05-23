@@ -19,6 +19,8 @@ RELEASE  = $(RELEASE_NUMBER)-$(RELEASE_DATE_NUMBER)
 PACKAGE  = WordIndex ($(RELEASE))
 #SETUP   = Setup-wordindex-$(RELEASE).exe
 
+MAKEFILE = Makefile.vc
+
 #
 # Tools:
 #
@@ -40,7 +42,7 @@ DOXYGEN = doxygen
 DOC     = # chm result
 DOCSRC  =
 PRGSRC  =
-STPSRC  = Makefile
+STPSRC  = $(MAKEFILE)
 
 #
 # Rules:
@@ -98,11 +100,11 @@ programs: $(PRGBIN)
 
 src/version.h: src/version.h_in
 
-$(PRGVER): Makefile $(PRGVER)_in
+$(PRGVER): $(MAKEFILE) $(PRGVER)_in
 
 #$(PRGOBJ): $(PRGHDR)
 
-$(PRGBIN): $(PRGOBJ)   #  $(PRGRES) $(PRGLIB)
+$(PRGBIN): $(PRGVER) $(PRGOBJ)   #  $(PRGRES) $(PRGLIB)
    $(CC) $(CFLAGS) -o$@ $(PRGOBJ) $(PRGLIB)
 
 #

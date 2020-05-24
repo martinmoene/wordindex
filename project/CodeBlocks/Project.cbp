@@ -12,18 +12,18 @@
 				<Option compiler="gcc" />
 			</Target>
 		</Build>
-		<Unit filename="Authors.txt" />
-		<Unit filename="ChangeLog.txt" />
-		<Unit filename="Copying" />
-		<Unit filename="FAQ.txt" />
-		<Unit filename="Install.txt" />
-		<Unit filename="License.txt" />
-		<Unit filename="News.txt" />
-		<Unit filename="Problems.txt" />
-		<Unit filename="Project.txt" />
-		<Unit filename="Readme.txt.in" />
-		<Unit filename="Release.txt" />
-		<Unit filename="ToDo.txt" />
+		<Unit filename="../../Authors.txt" />
+		<Unit filename="../../ChangeLog.txt" />
+		<Unit filename="../../Copying" />
+		<Unit filename="../../FAQ.txt" />
+		<Unit filename="../../Install.txt" />
+		<Unit filename="../../License.txt" />
+		<Unit filename="../../News.txt" />
+		<Unit filename="../../Problems.txt" />
+		<Unit filename="../../Project.txt" />
+		<Unit filename="../../Readme.txt.in" />
+		<Unit filename="../../Release.txt" />
+		<Unit filename="../../ToDo.txt" />
 		<Extensions>
 			<code_completion />
 		</Extensions>

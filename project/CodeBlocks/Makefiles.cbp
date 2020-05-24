@@ -15,25 +15,25 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Makefile">
+		<Unit filename="../../Makefile">
 			<Option compile="1" />
 			<Option link="1" />
 		</Unit>
-		<Unit filename="Makefile.rules">
+		<Unit filename="../../Makefile.rules">
 			<Option compile="1" />
 			<Option link="1" />
 		</Unit>
-		<Unit filename="doc\Module.mk">
+		<Unit filename="../../doc\Module.mk">
 			<Option compile="1" />
 			<Option link="1" />
 		</Unit>
-		<Unit filename="doc\mkDoc.bat" />
-		<Unit filename="make.bat" />
-		<Unit filename="src\Module.mk">
+		<Unit filename="../../doc\mkDoc.bat" />
+		<Unit filename="../../make.bat" />
+		<Unit filename="../../src\Module.mk">
 			<Option compile="1" />
 			<Option link="1" />
 		</Unit>
-		<Unit filename="unittest\Module.mk" />
+		<Unit filename="../../unittest\Module.mk" />
 		<Extensions>
 			<code_completion />
 			<envvars />

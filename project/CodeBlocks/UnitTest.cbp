@@ -15,12 +15,12 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Test-Fructose.cpp" />
-		<Unit filename="Test-Logger.cpp" />
-		<Unit filename="Test-Pair.cpp" />
-		<Unit filename="Test-Tokenizer.cpp" />
-		<Unit filename="Test-Utility.cpp" />
-		<Unit filename="Test-WordIndex.cpp" />
+		<Unit filename="../../unittest/Test-Fructose.cpp" />
+		<Unit filename="../../unittest/Test-Logger.cpp" />
+		<Unit filename="../../unittest/Test-Pair.cpp" />
+		<Unit filename="../../unittest/Test-Tokenizer.cpp" />
+		<Unit filename="../../unittest/Test-Utility.cpp" />
+		<Unit filename="../../unittest/Test-WordIndex.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

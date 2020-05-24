@@ -23,14 +23,14 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Config.h" />
-		<Unit filename="Logger.h" />
-		<Unit filename="Pair.h" />
-		<Unit filename="Tokenizer.h" />
-		<Unit filename="Utility.h" />
-		<Unit filename="Version.h_in" />
-		<Unit filename="WordIndex.h" />
-		<Unit filename="main.cpp" />
+		<Unit filename="../../src/Config.h" />
+		<Unit filename="../../src/Logger.h" />
+		<Unit filename="../../src/Pair.h" />
+		<Unit filename="../../src/Tokenizer.h" />
+		<Unit filename="../../src/Utility.h" />
+		<Unit filename="../../src/Version.h_in" />
+		<Unit filename="../../src/WordIndex.h" />
+		<Unit filename="../../src/main.cpp" />
 		<Extensions>
 			<code_completion />
 		</Extensions>

@@ -12,11 +12,11 @@
 				<Option compiler="gcc" />
 			</Target>
 		</Build>
-		<Unit filename="Doxyfile" />
-		<Unit filename="Footer.html" />
-		<Unit filename="MainPage.txt" />
-		<Unit filename="examples\copy_tokens.cpp" />
-		<Unit filename="examples\insert_tokens.cpp" />
+		<Unit filename="../../doc/Doxyfile" />
+		<Unit filename="../../doc/Footer.html" />
+		<Unit filename="../../doc/MainPage.txt" />
+		<Unit filename="../../doc/examples/copy_tokens.cpp" />
+		<Unit filename="../../doc/examples/insert_tokens.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

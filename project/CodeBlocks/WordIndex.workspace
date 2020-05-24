@@ -3,8 +3,8 @@
 	<Workspace title="Workspace">
 		<Project filename="Project.cbp" />
 		<Project filename="Makefiles.cbp" />
-		<Project filename="src\Program.cbp" />
-		<Project filename="unittest\UnitTest.cbp" active="1" />
-		<Project filename="doc\Documentation.cbp" />
+		<Project filename="Program.cbp" />
+		<Project filename="UnitTest.cbp" />
+		<Project filename="Documentation.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

@@ -4,7 +4,7 @@
  *  file:  UnlabeledMultiArg.h
  * 
  *  Copyright (c) 2003, Michael E. Smoot.
- *  All rights reverved.
+ *  All rights reserved.
  * 
  *  See the file COPYING in the top directory of this distribution for
  *  more information.
@@ -41,7 +41,7 @@ class UnlabeledMultiArg : public MultiArg<T>
 {
 
 	// If compiler has two stage name lookup (as gcc >= 3.4 does)
-	// this is requried to prevent undef. symbols
+	// this is required to prevent undef. symbols
 	using MultiArg<T>::_ignoreable;
 	using MultiArg<T>::_hasBlanks;
 	using MultiArg<T>::_extractValue;
@@ -171,7 +171,7 @@ class UnlabeledMultiArg : public MultiArg<T>
 		virtual std::string longID(const std::string& val="val") const;
 
 		/**
-		 * Opertor ==.
+		 * Operator ==.
 		 * \param a - The Arg to be compared to this.
 		 */
 		virtual bool operator==(const Arg& a) const;
@@ -270,17 +270,15 @@ bool UnlabeledMultiArg<T>::processArg(int *i, std::vector<std::string>& args)
 template<class T>
 std::string UnlabeledMultiArg<T>::shortID(const std::string& val) const
 {
-	std::string id = "<" + _typeDesc + "> ...";
-
-	return id;
+	static_cast<void>(val); // Ignore input, don't warn
+	return std::string("<") + _typeDesc + "> ...";
 }
 
 template<class T>
 std::string UnlabeledMultiArg<T>::longID(const std::string& val) const
 {
-	std::string id = "<" + _typeDesc + ">  (accepted multiple times)";
-
-	return id;
+	static_cast<void>(val); // Ignore input, don't warn
+	return std::string("<") + _typeDesc + ">  (accepted multiple times)";
 }
 
 template<class T>

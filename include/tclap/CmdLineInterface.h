@@ -5,7 +5,7 @@
  * 
  *  Copyright (c) 2003, Michael E. Smoot .
  *  Copyright (c) 2004, Michael E. Smoot, Daniel Aarno.
- *  All rights reverved.
+ *  All rights reserved.
  *
  *  See the file COPYING in the top directory of this distribution for
  *  more information.
@@ -82,7 +82,14 @@ class CmdLineInterface
 		 * \param argc - Number of arguments.
 		 * \param argv - Array of arguments.
 		 */
-		virtual void parse(int argc, char** argv)=0;
+		virtual void parse(int argc, const char * const * argv)=0;
+
+        /**
+         * Parses the command line.
+         * \param args - A vector of strings representing the args. 
+         * args[0] is still the program name.
+         */
+        void parse(std::vector<std::string>& args);
 
 		/**
 		 * Returns the CmdLineOutput object.
@@ -129,6 +136,12 @@ class CmdLineInterface
 		 * automatically.
 		 */
 		virtual bool hasHelpAndVersion()=0;
+
+		/** 
+		 * Resets the instance as if it had just been constructed so that the
+		 * instance can be reused. 
+		 */
+		virtual void reset()=0;
 };
 
 } //namespace

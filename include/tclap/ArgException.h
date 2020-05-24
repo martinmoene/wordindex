@@ -1,10 +1,11 @@
+// -*- Mode: c++; c-basic-offset: 4; tab-width: 4; -*-
 
 /****************************************************************************** 
  * 
  *  file:  ArgException.h
  * 
  *  Copyright (c) 2003, Michael E. Smoot .
- *  All rights reverved.
+ *  All rights reserved.
  * 
  *  See the file COPYING in the top directory of this distribution for
  *  more information.
@@ -181,6 +182,16 @@ class SpecificationException : public ArgException
 							std::string("developer." )) 
 		{ }
 
+};
+
+class ExitException {
+public:
+	ExitException(int estat) : _estat(estat) {}
+
+	int getExitStatus() const { return _estat; }
+
+private:
+	int _estat;
 };
 
 } // namespace TCLAP

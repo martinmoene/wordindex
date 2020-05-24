@@ -1,3 +1,4 @@
+// -*- Mode: c++; c-basic-offset: 4; tab-width: 4; -*-
 
 /******************************************************************************
  *
@@ -5,7 +6,8 @@
  *
  *  Copyright (c) 2003, Michael E. Smoot .
  *  Copyright (c) 2004, Michael E. Smoot, Daniel Aarno .
- *  All rights reverved.
+ *  Copyright (c) 2017 Google Inc.
+ *  All rights reserved.
  *
  *  See the file COPYING in the top directory of this distribution for
  *  more information.
@@ -24,14 +26,34 @@
 #ifndef TCLAP_ARGUMENT_H
 #define TCLAP_ARGUMENT_H
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <string>
 #include <vector>
 #include <list>
 #include <iostream>
+#include <iomanip>
+#include <cstdio>
+
+#include <tclap/sstream.h>
+
+#if defined(HAVE_SSTREAM)
+#include <sstream>
+typedef std::istringstream istringstream;
+#elif defined(HAVE_STRSTREAM)
+#include <strstream>
+typedef std::istrstream istringstream;
+#else
+#error "Need a stringstream (sstream or strstream) to compile!"
+#endif
 
 #include <tclap/ArgException.h>
 #include <tclap/Visitor.h>
 #include <tclap/CmdLineInterface.h>
+#include <tclap/ArgTraits.h>
+#include <tclap/StandardTraits.h>
 
 namespace TCLAP {
 
@@ -43,6 +65,15 @@ namespace TCLAP {
 class Arg
 {
 	private:
+		/**
+		 * Prevent accidental copying.
+		 */
+		Arg(const Arg& rhs);
+
+		/**
+		 * Prevent accidental copying.
+		 */
+		Arg& operator=(const Arg& rhs);
 
 		/**
 		 * Indicates whether the rest of the arguments should be ignored.
@@ -68,7 +99,7 @@ class Arg
 		std::string _flag;
 
 		/**
-		 * A single work namd indentifying the argument.
+		 * A single word namd identifying the argument.
 		 * This value (preceded by two dashed {--}) can also be used
 		 * to identify an argument on the command line.  Note that the
 		 * _name does NOT include the two dashes as part of the _name. The
@@ -107,7 +138,7 @@ class Arg
 		bool _alreadySet;
 
 		/**
-		 * A pointer to a vistitor object.
+		 * A pointer to a visitor object.
 		 * The visitor allows special handling to occur as soon as the
 		 * argument is matched.  This defaults to NULL and should not
 		 * be used unless absolutely necessary.
@@ -128,7 +159,7 @@ class Arg
 		bool _acceptsMultipleValues;
 
 		/**
-		 * Performs the special handling described by the Vistitor.
+		 * Performs the special handling described by the Visitor.
 		 */
 		void _checkWithVisitor() const;
 
@@ -182,33 +213,37 @@ class Arg
 
 		/**
 		 * The char used as a place holder when SwitchArgs are combined.
-		 * Currently set to '*', which shouldn't cause many problems since
-		 * *'s are expanded by most shells on the command line.
+		 * Currently set to the bell char (ASCII 7).
 		 */
-		static const char blankChar() { return '*'; }
+		static char blankChar() { return (char)7; }
 
 		/**
-		 * The char that indicates the beginning of a flag.  Currently '-'.
+		 * The char that indicates the beginning of a flag.  Defaults to '-', but
+		 * clients can define TCLAP_FLAGSTARTCHAR to override.
 		 */
-		static const char flagStartChar() { return '-'; }
+#ifndef TCLAP_FLAGSTARTCHAR
+#define TCLAP_FLAGSTARTCHAR '-'
+#endif
+		static char flagStartChar() { return TCLAP_FLAGSTARTCHAR; }
 
 		/**
-		 * The sting that indicates the beginning of a flag.  Currently "-".
-		 * Should be identical to flagStartChar.
+		 * The sting that indicates the beginning of a flag.  Defaults to "-", but
+		 * clients can define TCLAP_FLAGSTARTSTRING to override. Should be the same
+		 * as TCLAP_FLAGSTARTCHAR.
 		 */
-		static const std::string flagStartString() { return "-"; }
+#ifndef TCLAP_FLAGSTARTSTRING
+#define TCLAP_FLAGSTARTSTRING "-"
+#endif
+		static const std::string flagStartString() { return TCLAP_FLAGSTARTSTRING; }
 
 		/**
-		 * The sting that indicates the beginning of a name.  Currently "--".
-		 * Should be flagStartChar twice.
+		 * The sting that indicates the beginning of a name.  Defaults to "--", but
+		 *  clients can define TCLAP_NAMESTARTSTRING to override.
 		 */
-		static const std::string nameStartString() { return "--"; }
-
-		/**
-		 * The sting that indicates the alternate beginning of a name.  Currently "+".
-		 * Should be flagStartChar twice.
-		 */
-		static const std::string nameStartString2() { return "+"; }
+#ifndef TCLAP_NAMESTARTSTRING
+#define TCLAP_NAMESTARTSTRING "--"
+#endif
+		static const std::string nameStartString() { return TCLAP_NAMESTARTSTRING; }
 
 		/**
 		 * The name used to identify the ignore rest argument.
@@ -337,9 +372,23 @@ class Arg
 		 */
 		void setRequireLabel( const std::string& s );
 
+		/**
+		 * Used for MultiArgs and XorHandler to determine whether args
+		 * can still be set.
+		 */
 		virtual bool allowMore();
+
+		/**
+		 * Use by output classes to determine whether an Arg accepts
+		 * multiple values.
+		 */
 		virtual bool acceptsMultipleValues();
 
+		/**
+		 * Clears the Arg object and allows it to be reused by new
+		 * command lines.
+		 */
+		 virtual void reset();
 };
 
 /**
@@ -357,6 +406,55 @@ typedef std::vector<Arg*>::iterator ArgVectorIterator;
  */
 typedef std::list<Visitor*>::iterator VisitorListIterator;
 
+/*
+ * Extract a value of type T from it's string representation contained
+ * in strVal. The ValueLike parameter used to select the correct
+ * specialization of ExtractValue depending on the value traits of T.
+ * ValueLike traits use operator>> to assign the value from strVal.
+ */
+template<typename T> void
+ExtractValue(T &destVal, const std::string& strVal, ValueLike vl)
+{
+    static_cast<void>(vl); // Avoid warning about unused vl
+    istringstream is(strVal.c_str());
+
+    int valuesRead = 0;
+    while ( is.good() ) {
+	if ( is.peek() != EOF )
+#ifdef TCLAP_SETBASE_ZERO
+	    is >> std::setbase(0) >> destVal;
+#else
+	    is >> destVal;
+#endif
+	else
+	    break;
+
+	valuesRead++;
+    }
+
+    if ( is.fail() )
+	throw( ArgParseException("Couldn't read argument value "
+				 "from string '" + strVal + "'"));
+
+
+    if ( valuesRead > 1 )
+	throw( ArgParseException("More than one valid value parsed from "
+				 "string '" + strVal + "'"));
+
+}
+
+/*
+ * Extract a value of type T from it's string representation contained
+ * in strVal. The ValueLike parameter used to select the correct
+ * specialization of ExtractValue depending on the value traits of T.
+ * StringLike uses assignment (operator=) to assign from strVal.
+ */
+template<typename T> void
+ExtractValue(T &destVal, const std::string& strVal, StringLike sl)
+{
+    static_cast<void>(sl); // Avoid warning about unused sl
+    SetString(destVal, strVal);
+}
 
 //////////////////////////////////////////////////////////////////////
 //BEGIN Arg.cpp
@@ -387,20 +485,19 @@ inline Arg::Arg(const std::string& flag,
 	if ( _name != ignoreNameString() &&
 		 ( _flag == Arg::flagStartString() ||
 		   _flag == Arg::nameStartString() ||
-		   _flag == Arg::nameStartString2() ||
 		   _flag == " " ) )
 		throw(SpecificationException("Argument flag cannot be either '" +
 							Arg::flagStartString() + "' or '" +
 							Arg::nameStartString() + "' or a space.",
 							toString() ) );
 
-	// if ( ( _name.find( Arg::flagStartString(), 0 ) != std::string::npos ) ||
-		 // ( _name.find( Arg::nameStartString(), 0 ) != std::string::npos ) ||
-		 // ( _name.find( " ", 0 ) != std::string::npos ) )
-		// throw(SpecificationException("Argument name cannot contain either '" +
-							// Arg::flagStartString() + "' or '" +
-							// Arg::nameStartString() + "' or space.",
-							// toString() ) );
+	if ( ( _name.substr( 0, Arg::flagStartString().length() ) == Arg::flagStartString() ) ||
+		 ( _name.substr( 0, Arg::nameStartString().length() ) == Arg::nameStartString() ) ||
+		 ( _name.find( " ", 0 ) != std::string::npos ) )
+		throw(SpecificationException("Argument name begin with either '" +
+							Arg::flagStartString() + "' or '" +
+							Arg::nameStartString() + "' or space.",
+							toString() ) );
 
 }
 
@@ -415,11 +512,8 @@ inline std::string Arg::shortID( const std::string& valueId ) const
 	else
 		id = Arg::nameStartString() + _name;
 
-	std::string delim = " ";
-	delim[0] = Arg::delimiter(); // ugly!!!
-
 	if ( _valueRequired )
-		id += delim + "<" + valueId  + ">";
+		id += std::string( 1, Arg::delimiter() ) + "<" + valueId  + ">";
 
 	if ( !_required )
 		id = "[" + id + "]";
@@ -436,7 +530,7 @@ inline std::string Arg::longID( const std::string& valueId ) const
 		id += Arg::flagStartString() + _flag;
 
 		if ( _valueRequired )
-			id += " <" + valueId + ">";
+			id += std::string( 1, Arg::delimiter() ) + "<" + valueId + ">";
 
 		id += ",  ";
 	}
@@ -444,7 +538,7 @@ inline std::string Arg::longID( const std::string& valueId ) const
 	id += Arg::nameStartString() + _name;
 
 	if ( _valueRequired )
-		id += " <" + valueId + ">";
+		id += std::string( 1, Arg::delimiter() ) + "<" + valueId + ">";
 
 	return id;
 
@@ -496,10 +590,8 @@ inline void Arg::setRequireLabel( const std::string& s)
 
 inline bool Arg::argMatches( const std::string& argFlag ) const
 {
-	if ( ( argFlag == Arg::flagStartString()  + _flag && _flag != "" )
-	||     argFlag == Arg::nameStartString()  + _name
-	||     argFlag == Arg::nameStartString2() + _name
-	)
+	if ( ( argFlag == Arg::flagStartString() + _flag && _flag != "" ) ||
+	       argFlag == Arg::nameStartString() + _name )
 		return true;
 	else
 		return false;
@@ -583,6 +675,12 @@ inline bool Arg::allowMore()
 inline bool Arg::acceptsMultipleValues()
 {
 	return _acceptsMultipleValues;
+}
+
+inline void Arg::reset()
+{
+	_xorSet = false;
+	_alreadySet = false;
 }
 
 //////////////////////////////////////////////////////////////////////

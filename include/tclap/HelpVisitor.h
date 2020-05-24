@@ -4,7 +4,7 @@
  *  file:  HelpVisitor.h
  * 
  *  Copyright (c) 2003, Michael E. Smoot .
- *  All rights reverved.
+ *  All rights reserved.
  * 
  *  See the file COPYING in the top directory of this distribution for
  *  more information.
@@ -34,6 +34,13 @@ namespace TCLAP {
  */
 class HelpVisitor: public Visitor
 {
+	private:
+		/**
+		 * Prevent accidental copying.
+		 */
+		HelpVisitor(const HelpVisitor& rhs);
+		HelpVisitor& operator=(const HelpVisitor& rhs);
+
 	protected:
 
 		/**
@@ -60,7 +67,7 @@ class HelpVisitor: public Visitor
 		 * Calls the usage method of the CmdLineOutput for the 
 		 * specified CmdLine.
 		 */
-		void visit() { (*_out)->usage(*_cmd); exit(0); }
+		void visit() { (*_out)->usage(*_cmd); throw ExitException(0); }
 		
 };
 

@@ -5,7 +5,7 @@
  *  file:  ValuesConstraint.h
  * 
  *  Copyright (c) 2005, Michael E. Smoot
- *  All rights reverved.
+ *  All rights reserved.
  * 
  *  See the file COPYING in the top directory of this distribution for
  *  more information.
@@ -23,23 +23,14 @@
 #ifndef TCLAP_VALUESCONSTRAINT_H
 #define TCLAP_VALUESCONSTRAINT_H
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <string>
 #include <vector>
 #include <tclap/Constraint.h>
-
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#else
-#define HAVE_SSTREAM
-#endif
-
-#if defined(HAVE_SSTREAM)
-#include <sstream>
-#elif defined(HAVE_STRSTREAM)
-#include <strstream>
-#else
-#error "Need a stringstream (sstream or strstream) to compile!"
-#endif
+#include <tclap/sstream.h>
 
 namespace TCLAP {
 
@@ -97,7 +88,8 @@ class ValuesConstraint : public Constraint<T>
 
 template<class T>
 ValuesConstraint<T>::ValuesConstraint(std::vector<T>& allowed)
-: _allowed(allowed)
+: _allowed(allowed),
+  _typeDesc("")
 { 
     for ( unsigned int i = 0; i < _allowed.size(); i++ )
     {

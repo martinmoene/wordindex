@@ -22,7 +22,7 @@
  * $Id$
  */
 
-#include <hdl/mids.h>
+
 
 /*
  * end of file

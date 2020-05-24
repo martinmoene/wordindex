@@ -31,9 +31,15 @@
 
 #include "Config.h"                     // for configuration
 
-#include <io.h>                         // for _access()
 #include <string>                       // for std::string
 #include <sstream>                      // for std::stringstream
+
+#ifdef _WIN32
+# include <io.h>                        // for _access()
+#else
+# include <stdio.h>                     // for snprintf()
+# include <unistd.h>                    // for access()
+#endif
 
 namespace wordindex {
 
@@ -83,7 +89,12 @@ inline const std::string to_string( long const x )
 {
    char buffer[32];
 
+#ifdef _WIN32
    return _ltoa( x, buffer, 10 );
+#else
+   snprintf( buffer, sizeof buffer, "%ld", x );
+   return buffer;
+#endif
 }
 
 /**
@@ -101,7 +112,11 @@ inline const std::string to_string( double const x, int const n = 3 )
 {
    char buffer[32];
 
+#ifdef _WIN32
    return _gcvt( x, n, buffer );
+#else
+   return gcvt( x, n, buffer );
+#endif
 }
 
 /**
@@ -165,7 +180,11 @@ inline const std::string extension( std::string const filename )
  */
 inline const bool exist( std::string const filename)
 {
+#ifdef _WIN32
    return "-" == filename || 0 == _access( to_charptr( filename ), 0 );
+#else
+   return "-" == filename || 0 == access( to_charptr( filename ), 0 );
+#endif
 }
 
 } // namespace wordindex
@@ -175,4 +194,3 @@ inline const bool exist( std::string const filename)
 /*
  * end of file
  */
-

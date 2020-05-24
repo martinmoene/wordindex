@@ -3,7 +3,7 @@
  *
  * This file is part of WordIndex.
  *
- * Copyright (C) 2007-2008, Martin J. Moene.
+ * Copyright (C) 2007-2020, Martin J. Moene.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -131,7 +131,7 @@ std::string const banner(
  * the program copyright.
  */
 std::string const copyright(
-   "Copyright 2007-2008, by Martin J. Moene.\n"
+   "Copyright 2007-2020, by Martin J. Moene.\n"
 );
 
 /// @} Configuration-End

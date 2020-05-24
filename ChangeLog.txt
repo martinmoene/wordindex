@@ -1,6 +1,6 @@
 ChangeLog for WordIndex.
 
-Copyright (C) 2007-2008, Martin J. Moene.
+Copyright (C) 2007-2020, Martin J. Moene.
 WordIndex is free software, see the Copying document.
 
 0.0.2 alpha 2008-02-08 (martin)

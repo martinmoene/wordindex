@@ -1,6 +1,6 @@
 ToDo for WordIndex
 
-Copyright (C) 2007-2008, Martin J. Moene.
+Copyright (C) 2007-2020, Martin J. Moene.
 WordIndex is free software, see the Copying document.
 
 

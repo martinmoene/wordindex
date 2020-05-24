@@ -1,5 +1,5 @@
 /* FRUCTOSE C++ unit test library. 
-Copyright (c) 2007 Andrew Peter Marlow. All rights reserved.
+Copyright (c) 2012 Andrew Peter Marlow. All rights reserved.
 http://www.andrewpetermarlow.co.uk.
 
 This library is free software; you can redistribute it and/or

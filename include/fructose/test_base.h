@@ -1,5 +1,5 @@
 /* FRUCTOSE C++ unit test library. 
-Copyright (c) 2007 Andrew Peter Marlow. All rights reserved.
+Copyright (c) 2014 Andrew Peter Marlow. All rights reserved.
 http://www.andrewpetermarlow.co.uk.
 
 This library is free software; you can redistribute it and/or
@@ -62,7 +62,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  * no exception is to be thrown upon the evaluation of a condition;
  * if one is then the assertion fails.
  *
- *
  * - floating point compare assertions.
  * Floating point comparisons can be asserted for using relative
  * or absolute tolerances.
@@ -70,6 +69,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  * - Fine control over test selection.
  * The tests are named in the harness and may be selected by name
  * from the command line. By default all tests are run.
+ *
+ * - Each test can receive its own command line parameters.
+ * Each test can obtain any test-specific parameters that were
+ * passed using the command line.
  *
  * - Simple test harnesses.
  * The harness just defines one class, where each public function
@@ -100,8 +103,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  * with CppUnit. At the time CppUnit was not even buildable on
  * the main platform being used (Solaris). It has subsequently been
  * ported but this was just one obstacle among many.
- * CppUnit was judged to be too heavyweight for the needs of most
- * simple unit test harnesses so a more lightweight library was developed.
+ * CppUnit was judged to be too heavy duty for the needs of most
+ * simple unit test harnesses so a more light duty library was developed.
  * This one has just two classes, test_base and test_root, and a
  * handful of macros for convenient assertion testing.
  *
@@ -110,10 +113,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  * Some other unit test frameworks rely on other components that are
  * not very lightweight and not always very portable.
  * FRUCTOSE also has tried to avoid dependencies on other external
- * libraries. It is almost completely  standalone. Its only external
- * dependency is TCLAP, the Templatized C++ Command Line Parsing library.
- * This is for handling the command line. TCLAP is all done with inlined 
- * templates and so does not require a library to be linked in.
+ * libraries. It is completely standalone.
+ * It is all done with inlined templates and so does not require 
+ * a library to be linked in.
  *
  * \subsection simplicity Test harnesses must be simple
  *
@@ -121,7 +123,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  * There are sometimes many classes to write and several files.
  * The objective with FRUCTOSE was to have a class that is comprised
  * of just 3 files; the header, the implementation and the test harness.
- * a FRUCTOSE test harness requires just one class to be defined.
+ * A FRUCTOSE test harness requires just one class to be defined.
  * Each public function of that class is designed to be a test case.
  *
  * \section not What FRUCTOSE does not do
@@ -158,7 +160,7 @@ namespace fructose {
  * Synopsis:
  * 
  * @code
- *     #include "fructose/test_base.h"
+ *     #include "fructose/fructose.h"
  * 
  *     [...]
  * 
@@ -216,27 +218,29 @@ namespace fructose {
  * 
  * @code
  *
- *  USAGE:
- *  
- *     ./example  [-h] [-a] [-v] [--] <testNameString> ...
- *  
- *  
- *  Where:
- *  
- *     -h,  --help
- *       -h[elp]
- *  
- *     -a,  --assert_fatal
- *       -a[ssert_fatal]
- *  
- *     -v,  --verbose
- *       -v[erbose]
- *  
- *     --,  --ignore_rest
- *       Ignores the rest of the labeled arguments following this flag.
- *  
- *     <testNameString>  (accepted multiple times)
- *       test names
+ * USAGE: 
+ *
+ *    ./example [-h] [-r] [-a] [-v] [--] <testNameString> ...
+ *
+ * Where: 
+ *
+ * -h,  --help           produces this help
+ *
+ * -r,  --reverse        reverses the sense of test assertions.
+
+ *  -a,  --assert_fatal   is used to make the first test failure fatal.
+ *
+ *  -v,  --verbose        turns on extra trace for those tests that have made use of it.
+ *
+ *  --,  --ignore_rest    Ignores the rest of the labeled arguments following this flag.
+ *
+ *
+ *   <testNameString>  (accepted multiple times)
+ *    test names
+ *
+ *   Any number of test names may be supplied on the command line. If the
+ *   name 'all' is included then all tests will be run.
+ *
  *  
  *  Supported test names are:
  *      test_equality
@@ -270,8 +274,16 @@ public:
      */
     typedef void (test_container::*test_case)(const std::string&);
     
-    // compiler-generated default constructor and destructor are OK
-        
+    // compiler-generated default constructor would be OK
+    // but gives warnings with GCC's -Weffc++.
+
+    test_base<test_container>()
+      : m_tests()
+      , m_available_tests(suite())
+      , m_exceptionPending("")
+      {
+      }
+
     /**
      * Register a test case
      * 
@@ -322,8 +334,6 @@ public:
      * This function returns a suite containing all the test cases named on 
      * the command line. If none are named, or if the keyword "all" is passed,
      * all the configured test cases are included.
-     * The command line is parsed using the Open Source package TCLAP
-     * (Templatized C++ Command Line Parser).
      * 
      * Note: This routine is provided for compatibility with older
      * versions of fructose. New programs should use the function
@@ -346,14 +356,21 @@ private:
     int do_run(const suite& suite);
 
     /**
-     * List of test cases, indexed by their names
+     * Collection of test cases, keyed by their names
      */
-    std::map<std::string, test_case> m_tests;
+    std::map<std::string, std::pair<test_case, test_info> > m_tests;
 
     /*
      * Defines the sequence in which tests have to be run.
      */
     suite m_available_tests;
+
+    /*
+     * If the fructose machinery itself has an error, then
+     * it is stored as a pending exception in this string.
+     * This enables the string to be checked when run is called.
+     */
+    std::string m_exceptionPending;
 };
 
 // ====================
@@ -365,8 +382,24 @@ inline void
 test_base<test_container>::add_test(const std::string& name, 
                                     test_case the_test)
 {
-    m_tests[name] = the_test;
-    m_available_tests.push_back(name);
+    if (m_exceptionPending.length() > 0)
+    {
+        return;
+    }
+
+    typename std::map<std::string, std::pair<test_case, test_info> >::const_iterator it = m_tests.find(name);
+    if (it == m_tests.end())
+    {
+        m_tests[name] = std::make_pair(the_test, test_info(name));
+        m_available_tests.push_back(name);
+    }
+    else
+    {
+        std::stringstream str;
+        str << "add_test called with test name '" << name
+            << "' which has already been added.";
+        m_exceptionPending = str.str();
+    }
 }
     
 template<typename test_container>
@@ -380,13 +413,25 @@ template<typename test_container>
 inline int 
 test_base<test_container>::run(int argc, char* argv[])
 {
-    test_root::suite the_suite = get_suite(argc, argv);
-    return run(the_suite);
+    int exitStatus = EXIT_SUCCESS;
+
+    if (m_exceptionPending.length() > 0)
+    {
+        std::cout << "ERROR in use of FRUCTOSE: " << m_exceptionPending << std::endl;
+        exitStatus = EXIT_FAILURE;
+    }
+    else
+    {
+        test_root::suite the_suite = get_suite(argc, argv);
+        exitStatus = run(the_suite);
+    }
+
+    return exitStatus; 
 }
 
 template<typename test_container>
 inline int 
-test_base<test_container>::run(const suite& suite) 
+test_base<test_container>::run(const test_root::suite& suite) 
 {
     try
     {
@@ -411,33 +456,35 @@ test_base<test_container>::do_run(const suite& suite)
             "test container class not passed to test_base template");
     }
 
-    for (typename suite::const_iterator it = suite.begin(); 
-         it != suite.end(); ++it)
+    for (typename suite::const_iterator it = suite.begin(); it != suite.end(); ++it)
     {
-        test_case test_case = m_tests[*it];
+        std::pair<test_case, test_info> value = m_tests[it->m_test_name];
+        test_case test_case = value.first;
         if (test_case)
         {
-            const std::string title = "Running test case " + *it;
-              
+            const std::string title = "Running test case " + it->m_test_name;
             if (verbose())
+            {
                 std::cout << std::endl << title << std::endl
                           << underline(title) << '\n' << std::endl;
+            }
             runner->setup();
-            runner->set_test_name(*it);
+            runner->set_test_info(&(*it));
             try
             {
-                (runner->*test_case)(*it);    
+                (runner->*test_case)(it->m_test_name);    
                 runner->teardown();
             }
-            catch(std::exception&)
+            catch(std::exception& ex)
             {
                 runner->teardown();
-                throw;
+                set_exception_happened();
+		std::cout << ex.what() << std::endl;
             }
         }
         else
         {
-            std::cerr << "No such test case: " << *it << std::endl;
+            std::cerr << "No such test case: " << it->m_test_name << std::endl;
         }
     }
     

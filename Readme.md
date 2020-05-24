@@ -2,9 +2,9 @@
 
 The *wordindex* program creates an alphabetically sorted list of words present in the input files and it reports the linenumbers where those words occur. In addition it can also report the number of word occurrences and the relative occurrences as a percentage (word frequency). Furthermore *wordindex* can accept a file with keywords --or stopwords-- that it must skip.
 
-I created the *wordindex* project to discover how I would write such a program in [C++](http://en.wikipedia.org/wiki/C%2B%2B), twenty years after its predecessor [xref](http://www.eld.leidenuniv.nl/~moene/Home/museum/software/xref/) which was programmed in  [C](http://en.wikipedia.org/wiki/C_%28programming_language%29). A notable aspect is the treatment of the input files as  [STL](http://en.wikipedia.org/wiki/Standard_Template_Library)-like [containers](http://en.wikipedia.org/wiki/Standard_Template_Library#Containers), or collections as they are called in [[Wilson, 2007](#wilson_2007)].
+I created the *wordindex* project to discover how I would write such a program in [C++](http://en.wikipedia.org/wiki/C%2B%2B), twenty years after its predecessor [xref](http://www.eld.leidenuniv.nl/~moene/Home/museum/software/xref/) which was programmed in  [C](http://en.wikipedia.org/wiki/C_%28programming_language%29). A notable aspect is the treatment of the input files as  [STL](http://en.wikipedia.org/wiki/Standard_Template_Library)-like [containers](http://en.wikipedia.org/wiki/Standard_Template_Library#Containers), or collections as they are called in [[1](#wilson_2007)].
 
-The *wordindex* program works, but the project is in its alpha stage. *wordindex* compiles with  [Microsoft Visual C++ 8.0](http://en.wikipedia.org/wiki/Visual_C%2B%2B) and with  [GNU C 3.4.2](http://en.wikipedia.org/wiki/GNU_C) on [MS Windows](http://en.wikipedia.org/wiki/Windows), but it's probably not to difficult to support other platforms as well. The [single-session make](http://sites.e-advies.nl/nonrecursive-make.html) setup needs further work.
+The *wordindex* program works, but the project is in its alpha stage. *wordindex* compiles with  [Microsoft Visual C++ 8.0](http://en.wikipedia.org/wiki/Visual_C%2B%2B) and with  [GNU C 3.4.2](http://en.wikipedia.org/wiki/GNU_C) on [MS Windows](http://en.wikipedia.org/wiki/Windows), but it's probably not to difficult to support other platforms as well. The [single-session make](http://sites.e-advies.nl/nonrecursive-make.html) setup needs further work [[2](#vanbergen_2002)][[3](#miller_2002)].
 
 *wordindex* is free software, and is distributed under the [GPL](http://www.gnu.org/copyleft/gpl.html). *wordindex* uses the  [open source](http://opensource.org/) unit test framework  [Fructose](http://fructose.sourceforge.net/) and the [Templatized C++ Command Line Parser Library, TCLAP](http://tclap.sourceforge.net/)
 
@@ -60,6 +60,10 @@ Example:
 
 This creates a list of lowercase words, sorted on frequency of occurrence.
 
+## References
 
-<a name="wilson_2007">Matthew Wilson.</a>
-[Extended STL, Volume 1: Collections and Iterators](http://www.extendedstl.com/). Addison-Wesley Professional, 2007. ISBN-10 0-321-30550-7, ISBN-13 978-0-321-30550-3.
+[1] <a name="wilson_2007">Matthew Wilson.</a> [Extended STL, Volume 1: Collections and Iterators](http://www.extendedstl.com/). Addison-Wesley Professional, 2007. ISBN-10 0-321-30550-7, ISBN-13 978-0-321-30550-3.
+
+[2] <a name="vanbergen_2002">Emile van Bergen.</a> [Implementing non-recursive make ](http://sites.e-advies.nl/nonrecursive-make.html). 2002.
+
+[3] <a name="miller_2002">Peter Miller.</a> [Recursive MakeConsidered Harmful](http://lcgapp.cern.ch/project/architecture/recursive_make.pdf) (PDF). 2002. ([Local copy](doc/recursive_make.pdf)).

@@ -245,6 +245,8 @@ class Arg
 #endif
 		static const std::string nameStartString() { return TCLAP_NAMESTARTSTRING; }
 
+		static const std::string nameStartString2() { return "+"; }
+
 		/**
 		 * The name used to identify the ignore rest argument.
 		 */
@@ -485,17 +487,21 @@ inline Arg::Arg(const std::string& flag,
 	if ( _name != ignoreNameString() &&
 		 ( _flag == Arg::flagStartString() ||
 		   _flag == Arg::nameStartString() ||
+		   _flag == Arg::nameStartString2() ||
 		   _flag == " " ) )
 		throw(SpecificationException("Argument flag cannot be either '" +
 							Arg::flagStartString() + "' or '" +
+							Arg::nameStartString2() + "' or '" +
 							Arg::nameStartString() + "' or a space.",
 							toString() ) );
 
 	if ( ( _name.substr( 0, Arg::flagStartString().length() ) == Arg::flagStartString() ) ||
 		 ( _name.substr( 0, Arg::nameStartString().length() ) == Arg::nameStartString() ) ||
+		 ( _name.substr( 0, Arg::nameStartString2().length() ) == Arg::nameStartString2() ) ||
 		 ( _name.find( " ", 0 ) != std::string::npos ) )
 		throw(SpecificationException("Argument name begin with either '" +
 							Arg::flagStartString() + "' or '" +
+							Arg::nameStartString2() + "' or '" +
 							Arg::nameStartString() + "' or space.",
 							toString() ) );
 
@@ -591,7 +597,8 @@ inline void Arg::setRequireLabel( const std::string& s)
 inline bool Arg::argMatches( const std::string& argFlag ) const
 {
 	if ( ( argFlag == Arg::flagStartString() + _flag && _flag != "" ) ||
-	       argFlag == Arg::nameStartString() + _name )
+	       argFlag == Arg::nameStartString() + _name ||
+	       argFlag == Arg::nameStartString2() + _name  )
 		return true;
 	else
 		return false;

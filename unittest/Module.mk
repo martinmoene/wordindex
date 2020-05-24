@@ -3,7 +3,7 @@
 #
 # This file is part of WordIndex.
 #
-# Copyright (C) 2007-2008, Martin J. Moene.
+# Copyright (C) 2007-2020, Martin J. Moene.
 #
 # $Id: $
 #
@@ -13,30 +13,30 @@
 
 
 unittests: \
-   UnitTest/Test-Fructose.exe \
-   UnitTest/Test-Logger.exe \
-   UnitTest/Test-Pair.exe \
-   UnitTest/Test-Tokenizer.exe \
-   UnitTest/Test-Utility.exe \
-   UnitTest/Test-WordIndex.exe \
-   UnitTest\Test-Fructose.exe  $(FRUCTOSE_OPTIONS)
-   UnitTest\Test-Pair.exe      $(FRUCTOSE_OPTIONS)
-   UnitTest\Test-Tokenizer.exe $(FRUCTOSE_OPTIONS)
+	unittest/Test-Fructose.exe \
+	unittest/Test-Logger.exe \
+	unittest/Test-Pair.exe \
+	unittest/Test-Tokenizer.exe \
+	unittest/Test-Utility.exe \
+	unittest/Test-WordIndex.exe \
+	unittest/Test-Fructose.exe  $(FRUCTOSE_OPTIONS) \
+	unittest/Test-Pair.exe      $(FRUCTOSE_OPTIONS) \
+	unittest/Test-Tokenizer.exe $(FRUCTOSE_OPTIONS)
 
-#   UnitTest\Test-Logger.exe    $(FRUCTOSE_OPTIONS)
-#   UnitTest\Test-Pair.exe      $(FRUCTOSE_OPTIONS)
-#   UnitTest\Test-Utility.exe   $(FRUCTOSE_OPTIONS)
-#   UnitTest\Test-WordIndex.exe $(FRUCTOSE_OPTIONS)
+#   unittest/Test-Logger.exe    $(FRUCTOSE_OPTIONS) \
+#   unittest/Test-Pair.exe      $(FRUCTOSE_OPTIONS) \
+#   unittest/Test-Utility.exe   $(FRUCTOSE_OPTIONS) \
+#   unittest/Test-WordIndex.exe $(FRUCTOSE_OPTIONS)
 
-UnitTest/Test-Fructose.exe:  UnitTest/Test-Fructose.cpp
-UnitTest/Test-Logger.exe:    UnitTest/Test-Logger.cpp
-UnitTest/Test-Pair.exe:      UnitTest/Test-Pair.cpp
-UnitTest/Test-Utility.exe:   UnitTest/Test-Utility.cpp
-UnitTest/Test-Tokenizer.exe: UnitTest/Test-Tokenizer.cpp
-UnitTest/Test-WordIndex.exe: UnitTest/Test-WordIndex.cpp
+unittest/Test-Fructose.exe:  unittest/Test-Fructose.cpp
+unittest/Test-Logger.exe:    unittest/Test-Logger.cpp
+unittest/Test-Pair.exe:      unittest/Test-Pair.cpp
+unittest/Test-Utility.exe:   unittest/Test-Utility.cpp
+unittest/Test-Tokenizer.exe: unittest/Test-Tokenizer.cpp
+unittest/Test-WordIndex.exe: unittest/Test-WordIndex.cpp
 
-.cpp.exe:
-   $(CC) $(CXXFLAGS) -I include -o $*.exe $<
+#.cpp.exe:
+#	$(CC) $(CXXFLAGS) -I include -o $*.exe $<
 
 #
 # end of file

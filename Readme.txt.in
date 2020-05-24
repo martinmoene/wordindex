@@ -42,9 +42,6 @@ MS VC8: WordIndex/src>cl /EHsc -I../include -Fewordindex.exe main.cpp
 The make procedure creates the unit test programs, wordindex.exe and the Doxygen
 documentation.
 
-Note: currently the makefiles are MS Nmake files, whereas the compilers used in
-the procedure is GNU C (!)
-
 
 2.2 Build Documentation
 
@@ -87,7 +84,6 @@ See also the documents Copying and Install.
 
  author: Martin J. Moene
  mailto: m.j.moene@eld.physics.LeidenUniv.nl
-phoneto: +31-71-5275960
 
 The most recent version of wordindex can be obtained from:
 	 https://github.com/martinmoene/wordindex

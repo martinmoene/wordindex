@@ -54,8 +54,11 @@ STPSRC  = $(MAKEFILE)
 #
 # Rules:
 #
-LFLAGS +=
-CXXFLAGS += -Wall
+INCLUDES     = -I include
+INCLUDES_SRC = $(INCLUDES) -I src
+
+LFLAGS   +=
+CXXFLAGS += -Wall $(INCLUDES)
 
 include Makefile.rules
 
@@ -65,7 +68,7 @@ include Makefile.rules
 	$(CC) -c $(CXXFLAGS) -o$@ $<
 
 %.exe: %.cpp
-	$(CC) $(CXXFLAGS) -I include -o $@ $<
+	$(CC) $(CXXFLAGS) -o $@ $<
 
 .h_in.h:
 	@$(ECHO) "[\n[ Editing $< for release $(RELEASE):\n["
@@ -131,9 +134,9 @@ dep: src/version.h Makefile.dep
 
 #.PHONY: Makefile.dep
 Makefile.dep: $(PRGVER)
-	$(CC) -MM -Iinclude src/main.cpp >$@
-	$(CC) -MM -Iinclude -Isrc doc/examples/copy_tokens.cpp >>$@
-	$(CC) -MM -Iinclude -Isrc doc/examples/insert_tokens.cpp >>$@
+	$(CC) -MM $(INCLUDES) src/main.cpp >$@
+	$(CC) -MM $(INCLUDES_SRC) doc/examples/copy_tokens.cpp >>$@
+	$(CC) -MM $(INCLUDES_SRC) doc/examples/insert_tokens.cpp >>$@
 
 include Makefile.dep
 

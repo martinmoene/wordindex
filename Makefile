@@ -55,7 +55,7 @@ STPSRC  = $(MAKEFILE)
 # Rules:
 #
 LFLAGS +=
-CXXFLAGS += -Wall -Iinclude
+CXXFLAGS += -Wall
 
 include Makefile.rules
 

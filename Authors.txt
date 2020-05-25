@@ -4,7 +4,7 @@ Copyright (C) 2007-2020, Martin J. Moene.
 WordIndex is free software, see the Copying document.
 
 Martin Moene
-mailto:m.j.moene@eld.physics.LeidenUniv.nl
+mailto:martin.moene@gmail.com
 http://www.eld.physics.LeidenUniv.nl/~moene/
 
 $Id$

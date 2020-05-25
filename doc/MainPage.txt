@@ -67,7 +67,7 @@ Notable aspects in which (the development of) this program differs from the hist
 
 <h2>WordIndex License</h2>
 
-Copyright &copy; 2007-2008, by Martin J. Moene <m.j.moene@eld.physics.LeidenUniv.nl>.
+Copyright &copy; 2007-2020, by Martin J. Moene <martin.moene@gmail.com>.
 
 Permission to use, copy, modify, and distribute this software and its
 documentation under the terms of the GNU General Public License is hereby
@@ -78,7 +78,7 @@ implied warranty. See the
 for more details.
 \n
 \n
-Web page: http://www.eld.leidenuniv.nl/~moene/Home/projects/wordindex/<br>
+Web page: https://github.com/martinmoene/wordindex/<br>
  *
  */
 

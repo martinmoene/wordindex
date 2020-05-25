@@ -103,7 +103,7 @@ namespace wordindex {
 /**
  * the author name.
  */
-std::string const author_string( "Martin J. Moene <m.j.moene@eld.physics.LeidenUniv.nl>" );
+std::string const author_string( "Martin J. Moene <martin.moene@gmail.com>" );
 
 /**
  * the program version.
